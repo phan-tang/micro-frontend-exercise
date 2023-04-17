@@ -9,8 +9,8 @@ export interface IButtonProps {
 
 const Button = (props: IButtonProps): JSX.Element => {
   return (
-    <button onClick={() => props.onClick('with button clicked')}>
-      { props.title || 'Shared Remote Button' }
+    <button className='primary-btn' onClick={() => props.onClick('with button clicked')}>
+      {props.title || 'Shared Remote Button'}
     </button>
   );
 }

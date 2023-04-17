@@ -24,13 +24,13 @@ export default class Api {
 
   static async getProductsByCategory(id: string | number) {
     const url = "/api/rest/product/filter_categories";
-    const { data, status } = await this.request.post(url, { ids: id});
+    const { data, status } = await this.request.post(url, { ids: id });
     return { data, status }
   }
 
   static async getProducts() {
     const url = "/api/rest/product/products";
-    const { data, status } = await this.request.post(url, { ids: 1});
+    const { data, status } = await this.request.post(url, { ids: 1 });
     return { data, status }
   }
 

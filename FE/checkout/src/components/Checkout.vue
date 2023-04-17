@@ -34,16 +34,8 @@
               </div>
               <div class="checkout__input">
                 <p>Address<span>*</span></p>
-                <input
-                  type="text"
-                  placeholder="Street Address"
-                  class="checkout__input__add"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Apartment, suite, unite ect (optinal)"
-                />
+                <input type="text" placeholder="Street Address" class="checkout__input__add" required />
+                <input type="text" placeholder="Apartment, suite, unite ect (optinal)" />
               </div>
               <div class="checkout__input">
                 <p>Town/City<span>*</span></p>
@@ -73,11 +65,7 @@
               </div>
               <div class="checkout__input">
                 <p>Order notes<span>*</span></p>
-                <input
-                  type="text"
-                  placeholder="Notes about your order, e.g. special notes for delivery."
-                  required
-                />
+                <input type="text" placeholder="Notes about your order, e.g. special notes for delivery." required />
               </div>
             </div>
             <div class="col-lg-4 col-md-6">
@@ -183,6 +171,7 @@ export default defineComponent({
           paymentStatus: "failed",
         });
       }
+      this.navigate("/");
       if (Object.keys(messageEvent).length > 0) {
         document.body.dispatchEvent(messageEvent);
       }

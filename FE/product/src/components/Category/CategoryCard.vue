@@ -1,6 +1,6 @@
 <template>
     <div className="categories__item set-bg"
-        :style="{backgroundImage: `url(${item.img || require('@/assets/img/default.png')})`}">
+        :style="{ backgroundImage: `url(${item.img || require('@/assets/img/default.png')})` }">
         <h5><a @click="navigate(`/shop?category=${item.id}`)">{{ item.name }}</a></h5>
     </div>
 </template>
@@ -43,6 +43,7 @@ export default defineComponent({
             padding: 12px 0 10px;
             background: $white-color;
             display: block;
+
             &:hover {
                 background-color: $primary-color;
                 color: $white-color;

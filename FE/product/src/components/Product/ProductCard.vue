@@ -1,7 +1,7 @@
 <template>
   <div class="product__discount__item product__item">
     <div class="product__discount__item__pic set-bg"
-         :style="{backgroundImage: `url(${item.list_img?.[0].url || require('@/assets/img/default.png')})`}">
+      :style="{ backgroundImage: `url(${item.list_img?.[0].url || require('@/assets/img/default.png')})` }">
       <div v-if="item.discount" class="product__discount__percent">-{{ item.discount }}%</div>
       <ul class="product__item__pic__hover">
         <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -13,15 +13,14 @@
       <div class="product__discount__item__text">
         <span>{{ item.category?.name }}</span>
         <h5><a @click="navigate(`/shop/${item.id}`)">{{ item.name }}</a></h5>
-        <div class="product__item__price">${{ item.price }} <span
-          v-if="item.discount">${{ item.price }}</span></div>
+        <div class="product__item__price">${{ item.price }} <span v-if="item.discount">${{ item.price }}</span></div>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
-import globalStorage, { IItemCart } from '@/utils/loadStorage';
+import { addToCart } from '@/helper/cart.helper';
 //@ts-ignore
 import { IProduct } from "@components/Product/product.type.ts";
 
@@ -33,16 +32,7 @@ export default defineComponent({
     eventBus: {} as any
   },
   methods: {
-    addToCart(item: any) {
-      const data: IItemCart = {
-        id: item.id,
-        title: item.name,
-        qty: 1,
-        price: item.price,
-        img: item.list_img?.[0].url || require('@/assets/img/default.png')
-      }
-      globalStorage.addItemToCart(data);
-    }
+    addToCart,
   }
 })
 </script>

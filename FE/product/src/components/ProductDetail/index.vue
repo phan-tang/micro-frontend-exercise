@@ -30,7 +30,7 @@
                 </div>
               </div>
             </div>
-            <a href="#" class="primary-btn">ADD TO CARD</a>
+            <a @click="addToCart(item)" class="primary-btn">ADD TO CARD</a>
             <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
             <ul>
               <li>
@@ -93,7 +93,7 @@ import API from "@/api";
 import Image from "@components/Image/index.vue";
 //@ts-ignore
 import { IProduct } from "@components/Product/product.type.ts";
-
+import { addToCart } from "@/helper/cart.helper";
 export default defineComponent({
   name: "ProductDetail",
   components: {
@@ -162,7 +162,8 @@ export default defineComponent({
         },
       });
       document.body.dispatchEvent(chatDataEvent);
-    }
+    },
+    addToCart
   },
 });
 </script>
