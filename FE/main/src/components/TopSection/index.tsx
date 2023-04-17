@@ -9,6 +9,7 @@ const TopSection = () => {
     title: 'FRESH FRUIT',
     content: 'Vegetable <br/>100% Organic',
     buttonTitle: 'SHOP NOW',
+    buttonLink: '/shop',
     description: 'Free Pickup and Delivery Available'
   };
 
