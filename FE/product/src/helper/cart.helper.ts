@@ -10,3 +10,8 @@ export const addToCart = (item: any) => {
     }
     globalStorage.addItemToCart(data);
 }
+
+export const sortByKey = (data: any[], key: string, order: string) => {
+    const sortOrder = order === "desc" ? "desc" : 'asc';
+    return sortOrder === "desc" ? data.sort((a, b) => b[key] - a[key]) : data.sort((a, b) => a[key] - b[key]);
+}

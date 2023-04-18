@@ -1,19 +1,19 @@
 <template>
     <div class="sidebar">
         <div class="sidebar__item">
-            <Menu/>
+            <Menu />
         </div>
         <div class="sidebar__item">
-            <PriceRange/>
+            <PriceRange />
         </div>
         <div class="sidebar__item sidebar__item__color--option">
-            <ColorSelectbox/>
+            <ColorSelectbox />
         </div>
         <div class="sidebar__item">
-            <SizeSelectbox/>
+            <SizeSelectbox />
         </div>
         <div class="sidebar__item">
-            <ProductSmallSlider :data="items"/>
+            <ProductSmallSlider :data="items" />
         </div>
     </div>
 </template>
@@ -28,12 +28,12 @@ import API from '@/api'
 export default defineComponent({
     name: "Sidebar",
     components: { ProductSmallSlider, PriceRange, ColorSelectbox, SizeSelectbox, Menu },
-    data(){
-        return{
+    data() {
+        return {
             items: null
         }
     },
-    async created(){
+    async created() {
         const { data } = await API.getLastedProducts({ limit: 21 });
         this.items = data.product
     }
@@ -41,6 +41,7 @@ export default defineComponent({
 </script>
 <style lang="scss">
 @import "@/assets/scss/variables";
+
 .sidebar__item {
     margin-bottom: 35px;
 
@@ -64,7 +65,8 @@ export default defineComponent({
                 color: $normal-color;
                 line-height: 39px;
                 display: block;
-                &.active{
+
+                &.active {
                     color: $primary-color;
                     font-weight: bold;
                 }

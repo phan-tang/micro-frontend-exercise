@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-md-5">
-          <Sidebar @getAllProducts="getAllProducts" @getProductsByCategory="getProductsByCategory" />
+          <Sidebar @getAllProducts="getAllProducts" @getProductsByCategory="getProductsByCategory" @navigate="navigate" />
         </div>
         <div class="col-lg-9 col-md-7">
           <div class="product__discount">
@@ -14,7 +14,7 @@
               <ProductSlider :data="saleItems" />
             </div>
           </div>
-          <Filter :count="items?.length" />
+          <Filter :count="items?.length" :setSortOrder="setSortOrder" />
           <ProductList :data="items" />
         </div>
       </div>
@@ -30,6 +30,7 @@ import Filter from "@components/Filter/index.vue";
 import ProductList from "@components/Product/ProductList.vue";
 //@ts-ignore
 import { IProduct } from "@components/Product/product.type.ts";
+import { sortByKey } from "@/helper/cart.helper";
 
 export default defineComponent({
   name: "Shop",
@@ -55,26 +56,41 @@ export default defineComponent({
     return {
       saleItems: null,
       items: null as IProduct[] | null,
+      sortOrder: "",
     };
   },
   async created() {
-    const categoryId = this.searchParams?.categoryId;
-    if (categoryId) {
-      this.getProductsByCategory(categoryId);
-    } else {
-      this.getAllProducts();
-    }
+    this.fetchProducts();
   },
   methods: {
+    async fetchProducts() {
+      const categoryId = this.searchParams?.categoryId;
+      if (categoryId) {
+        this.getProductsByCategory(categoryId);
+      } else {
+        this.getAllProducts();
+      }
+    },
     async getAllProducts() {
       const { data } = await API.getReviewedProducts({ limit: 100 });
-      this.items = data.product;
+      this.items = sortByKey(data.product, 'price', this.sortOrder);
       this.saleItems = data.product.filter((el: IProduct) => el.discount);
     },
     async getProductsByCategory(id: IProduct['id']) {
       const { data } = await API.getProductsByCategory(id);
-      this.items = data.category?.[0]?.products;
+      this.items = sortByKey(data.category?.[0]?.products, 'price', this.sortOrder);
     },
+    async setSortOrder(order: string) {
+      this.sortOrder = order;
+    }
   },
+  watch: {
+    sortOrder: {
+      handler() {
+        this.fetchProducts();
+      },
+      immediate: true
+    }
+  }
 });
 </script>

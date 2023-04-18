@@ -3,10 +3,10 @@
         <h4>Department</h4>
         <ul>
             <li>
-                <a :class="{active: !active}" @click="getAllProduct">All</a>
+                <a :class="{ active: !active }" @click="getAllProduct">All</a>
             </li>
             <li v-for="item in items" :key="item.id">
-                <a :class="{ active: active === item.id}" @click="handleCategory(item)">{{ item.name }}</a>
+                <a :class="{ active: active === item.id }" @click="handleCategory(item)">{{ item.name }}</a>
             </li>
         </ul>
     </div>

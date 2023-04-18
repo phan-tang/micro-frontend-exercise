@@ -1,12 +1,9 @@
 <template>
   <div>
     <div class="row">
-      <div
-        v-for="item in data"
-        :key="item.id"
-        :class="[column === 4 ? 'col-lg-3 col-md-4 col-sm-6' : 'col-lg-4 col-md-6 col-sm-6']"
-      >
-        <ProductCard :item="item"/>
+      <div v-for="item in data" :key="item.id"
+        :class="[column === 4 ? 'col-lg-3 col-md-4 col-sm-6' : 'col-lg-4 col-md-6 col-sm-6']">
+        <ProductCard :item="item" />
       </div>
     </div>
     <!-- <div class="product__pagination">
@@ -35,9 +32,11 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
 @import "@/assets/scss/mixins";
+
 .product__item {
   margin-bottom: 50px;
 }
+
 .product__pagination {
   padding-top: 10px;
 
@@ -53,11 +52,13 @@ export default defineComponent({
     text-align: center;
     margin-right: 16px;
     @include transition(all, 0.3s);
+
     &.active {
       background: $primary-color;
       border-color: $primary-color;
       color: $white-color;
     }
+
     &:hover {
       background: $primary-color;
       border-color: $primary-color;

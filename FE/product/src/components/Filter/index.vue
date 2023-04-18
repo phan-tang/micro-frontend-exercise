@@ -3,16 +3,17 @@
         <div class="row">
             <div class="col-lg-4 col-md-5">
                 <div class="filter__sort">
-                    <span>Sort By</span>
-                    <select>
-                        <option value="0">Default</option>
-                        <option value="0">Default</option>
+                    <span>Sort By Price</span>
+                    <select v-model="selected">
+                        <option v-for="option in options" :value="option.value" :key="option.value">
+                            {{ option.text }}
+                        </option>
                     </select>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4">
                 <div class="filter__found">
-                    <h6><span>{{count}}</span> Product(s) found</h6>
+                    <h6><span>{{ count }}</span> Product(s) found</h6>
                 </div>
             </div>
             <div class="col-lg-4 col-md-3">
@@ -29,10 +30,25 @@ import { defineComponent } from "vue"
 export default defineComponent({
     name: "Filter",
     props: {
-        count: Number
+        count: Number,
+        setSortOrder: Function
     },
-    mounted(){
-        $("select").niceSelect();
+    data() {
+        return {
+            selected: "asc",
+            options: [
+                { text: 'Ascending', value: 'asc' },
+                { text: 'Descending', value: 'desc' },
+            ]
+        }
+    },
+    watch: {
+        selected: {
+            handler() {
+                this.setSortOrder && this.setSortOrder(this.selected);
+            },
+            immediate: true
+        }
     }
 })
 </script>
@@ -141,5 +157,4 @@ export default defineComponent({
         }
     }
 }
-
 </style>
