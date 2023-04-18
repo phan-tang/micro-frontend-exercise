@@ -20,7 +20,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { addToCart } from '@/helper/cart.helper';
+import { addToCart } from '@/helper/product.helper';
 //@ts-ignore
 import { IProduct } from "@components/Product/product.type.ts";
 

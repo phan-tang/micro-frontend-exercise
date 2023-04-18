@@ -4,178 +4,185 @@
       - name: Get Products
         query: |
           query MyQuery ($ids: [Int!]) {
-            product(where: {id:{_in:$ids}}) {
-              availability
-              category_id
-              color
-              count
-              description
-              description_short
-              discount
-              id
-              infomation
-              is_featured
-              is_relative
-              name
-              price
-              slug
-              weight
-              list_img {
-                url
-              }
-            }
+          	product(where: {id:{_in:$ids}}) {
+          		availability
+          		category_id
+          		color
+          		count
+          		description
+          		description_short
+          		discount
+          		id
+          		infomation
+          		is_featured
+          		is_relative
+          		name
+          		price
+          		slug
+          		weight
+          		list_img {
+          			url
+          		}
+          	}
           }
       - name: Get Featured Products
         query: |
           query MyQuery ($isFeatured: Boolean = true, $limit: Int = 8) {
-            product(where: {is_featured:{_eq:$isFeatured}}, limit: $limit) {
-              id
-              name
-              price
-              list_img(limit: 1) {
-                url
-              }
-              category {
-                id
-                name
-                slug
-              }
-            }
+          	product(where: {is_featured:{_eq:$isFeatured}}, limit: $limit) {
+          		id
+          		name
+          		price
+          		list_img(limit: 1) {
+          			url
+          		}
+          		category {
+          			id
+          			name
+          			slug
+          		}
+          	}
           }
       - name: Get Lasted Products
         query: |
           query GetLastedProducts ($limit: Int = 3) {
-            product(limit: $limit, order_by: {created_at:desc}) {
-              id
-              list_img {
-                url
-              }
-              name
-              price
-              created_at
-            }
+          	product(limit: $limit, order_by: {created_at:desc}) {
+          		id
+          		list_img {
+          			url
+          		}
+          		name
+          		price
+          		created_at
+          	}
           }
       - name: Get Rated Products
         query: |
           query GetRatedProducts ($limit: Int = 3) {
-            product(limit: $limit, order_by: {rated:desc_nulls_last}) {
-              id
-              list_img {
-                url
-              }
-              name
-              price
-              rated
-            }
+          	product(limit: $limit, order_by: {rated:desc_nulls_last}) {
+          		id
+          		list_img {
+          			url
+          		}
+          		name
+          		price
+          		rated
+          	}
           }
       - name: Get Reviewed Products
         query: |
           query GetReviewedProducts ($limit: Int = 3) {
-            product(limit: $limit, order_by: {reviews:desc_nulls_last}) {
-              id
-              list_img {
-                url
-              }
-              name
-              price
-              reviews
-            }
+          	product(limit: $limit, order_by: {reviews:desc_nulls_last}) {
+          		id
+          		list_img {
+          			url
+          		}
+          		name
+          		price
+          		reviews
+          	}
           }
       - name: Get All Categories
         query: |
           query GetAllCategory ($limit: Int = 10) {
-            category(limit: $limit) {
-              img
-              id
-              name
-              slug
-            }
+          	category(limit: $limit) {
+          		img
+          		id
+          		name
+          		slug
+          	}
           }
       - name: Filter Categories
         query: |
           query MyQuery ($ids: [Int!]) {
-            category(where: {id:{_in:$ids}}) {
-              id
-              name
-              slug
-              products {
-                name
-                id
-                price
-                list_img {
-                  url
-                }
-                slug
-              }
-            }
+          	category(where: {id:{_in:$ids}}) {
+          		id
+          		name
+          		slug
+          		products {
+          			name
+          			id
+          			price
+          			color
+          			list_img {
+          				url
+          			}
+          			slug
+          		}
+          	}
           }
       - name: Get Product Detail
         query: |
           query ProductDetail ($id: Int) {
-            product(where: {id:{_eq:$id}}) {
-              description
-              description_short
-              discount
-              id
-              name
-              price
-              reviews
-              weight
-              rated
-              infomation
-              count
-              list_img {
-                id
-                url
-              }
-              availability
-            }
+          	product(where: {id:{_eq:$id}}) {
+          		description
+          		description_short
+          		discount
+          		id
+          		name
+          		price
+          		reviews
+          		weight
+          		rated
+          		color
+          		infomation
+          		count
+          		list_img {
+          			id
+          			url
+          		}
+          		availability
+          	}
           }
       - name: Get Relative Product
         query: |
           query RelactivedProduct {
-            product(where: {is_relative:{_eq:true}}, limit: 4) {
-              description
-              description_short
-              discount
-              id
-              name
-              price
-              reviews
-              weight
-              rated
-              infomation
-              count
-              list_img {
-                id
-                url
-              }
-              availability
-            }
+          	product(where: {is_relative:{_eq:true}}, limit: 4) {
+          		description
+          		description_short
+          		discount
+          		id
+          		name
+          		price
+          		reviews
+          		weight
+          		rated
+          		infomation
+          		count
+          		color
+          		list_img {
+          			id
+          			url
+          		}
+          		availability
+          	}
           }
       - name: Filter Products By Category Search
         query: |
           query MyQuery ($ids: Int, $search: String) {
-            product(where: {_and:[{category_id:{_eq:$ids}},{name:{_like:$search}}]}) {
-              name
-              id
-              price
-              list_img {
-                url
-              }
-              slug
-            }
+          	product(where: {_and:[{category_id:{_eq:$ids}},{name:{_like:$search}}]}) {
+          		name
+          		id
+          		price
+          		rated
+          		color
+          		list_img {
+          			url
+          		}
+          		slug
+          	}
           }
       - name: Filter Products By Search
         query: |
           query MyQuery ($search: String) {
-            product(where: {name:{_like:$search}}) {
-              name
-              id
-              price
-              list_img {
-                url
-              }
-              slug
-            }
+          	product(where: {name:{_like:$search}}) {
+          		name
+          		id
+          		price
+          		color
+          		rated
+          		list_img {
+          			url
+          		}
+          		slug
+          	}
           }

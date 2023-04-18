@@ -32,7 +32,6 @@ export default defineComponent({
     methods: {
         async handleSearch() {
             const categoryId = this.searchParams?.categoryId;
-            console.log(categoryId)
             const vm: any = this;
             let category = categoryId ? `category=${categoryId}` : '';
             let search = this.searchValue !== "" ? `search=${this.searchValue}` : "";

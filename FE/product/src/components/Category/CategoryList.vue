@@ -21,7 +21,8 @@ export default defineComponent({
         }
     },
     props: {
-        navigate: Function
+        navigate: Function,
+        categoryId: Number
     },
     data() {
         return {
@@ -49,3 +50,26 @@ export default defineComponent({
     }
 })
 </script>
+
+<style lang="scss">
+@import "@/assets/scss/variables";
+
+ul {
+
+    li {
+        list-style: none;
+
+        a {
+            font-size: 16px;
+            color: $normal-color;
+            line-height: 39px;
+            display: block;
+
+            &.active {
+                color: $primary-color;
+                font-weight: bold;
+            }
+        }
+    }
+}
+</style>

@@ -3,7 +3,8 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-md-5">
-          <Sidebar @getAllProducts="getAllProducts" @getProductsByCategory="getProductsByCategory" @navigate="navigate" />
+          <Sidebar @getAllProducts="getAllProducts" @getProductsByCategory="getProductsByCategory" @navigate="navigate"
+            :setColor="setColor" />
         </div>
         <div class="col-lg-9 col-md-7">
           <div class="product__discount">
@@ -30,7 +31,7 @@ import Filter from "@components/Filter/index.vue";
 import ProductList from "@components/Product/ProductList.vue";
 //@ts-ignore
 import { IProduct } from "@components/Product/product.type.ts";
-import { sortByKey } from "@/helper/cart.helper";
+import { sortByKey, filterByColor } from "@/helper/product.helper";
 
 export default defineComponent({
   name: "Shop",
@@ -58,6 +59,7 @@ export default defineComponent({
       saleItems: null,
       items: null as IProduct[] | null,
       sortOrder: "",
+      color: ""
     };
   },
   async created() {
@@ -76,28 +78,41 @@ export default defineComponent({
     async getAllProducts() {
       const { data } = await API.getReviewedProducts({ limit: 100 });
       this.items = sortByKey(data.product, 'price', this.sortOrder);
+      this.items = filterByColor(this.items, this.color);
       this.saleItems = data.product.filter((el: IProduct) => el.discount);
     },
     async getProductsByCategory(id: IProduct['id']) {
       const { data } = await API.getProductsByCategory(id);
       this.items = sortByKey(data.category?.[0]?.products, 'price', this.sortOrder);
+      this.items = filterByColor(this.items, this.color);
     },
     async getProductsByCategorySearch(id: IProduct['id'], search: string) {
       const { data } = await API.getProductsByCategorySearch(id, search);
       this.items = sortByKey(data.product, 'price', this.sortOrder);
+      this.items = filterByColor(this.items, this.color);
       this.saleItems = data.product.filter((el: IProduct) => el.discount);
     },
     async getProductsBySearch(search: string) {
       const { data } = await API.getProductsBySearch(search);
       this.items = sortByKey(data.product, 'price', this.sortOrder);
+      this.items = filterByColor(this.items, this.color);
       this.saleItems = data.product.filter((el: IProduct) => el.discount);
     },
     async setSortOrder(order: string) {
       this.sortOrder = order;
+    },
+    async setColor(newColor: string) {
+      this.color = newColor;
     }
   },
   watch: {
     sortOrder: {
+      handler() {
+        this.fetchProducts();
+      },
+      immediate: true
+    },
+    color: {
       handler() {
         this.fetchProducts();
       },
