@@ -19,7 +19,7 @@ const TopSection = () => {
     <section className="hero">
       <div className="row">
         <div className="col-lg-3">
-          <CategoryMenu />
+          <CategoryMenu categoryId={Number(searchParams.get('category'))} />
         </div>
         <div className="col-lg-9">
           <div className="hero__search">
