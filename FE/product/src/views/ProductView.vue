@@ -3,8 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-md-5">
-          <Sidebar @getAllProducts="getAllProducts" @getProductsByCategory="getProductsByCategory" @navigate="navigate"
-            :setColor="setColor" />
+          <Sidebar @navigate="navigate" :setColor="setColor" :color="color" />
         </div>
         <div class="col-lg-9 col-md-7">
           <div class="product__discount">
@@ -74,17 +73,6 @@ export default defineComponent({
       } else {
         this.getProductsBySearch(searchValue);
       }
-    },
-    async getAllProducts() {
-      const { data } = await API.getReviewedProducts({ limit: 100 });
-      this.items = sortByKey(data.product, 'price', this.sortOrder);
-      this.items = filterByColor(this.items, this.color);
-      this.saleItems = data.product.filter((el: IProduct) => el.discount);
-    },
-    async getProductsByCategory(id: IProduct['id']) {
-      const { data } = await API.getProductsByCategory(id);
-      this.items = sortByKey(data.category?.[0]?.products, 'price', this.sortOrder);
-      this.items = filterByColor(this.items, this.color);
     },
     async getProductsByCategorySearch(id: IProduct['id'], search: string) {
       const { data } = await API.getProductsByCategorySearch(id, search);

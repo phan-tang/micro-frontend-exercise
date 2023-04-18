@@ -7,7 +7,7 @@
             <PriceRange />
         </div>
         <div class="sidebar__item sidebar__item__color--option">
-            <ColorSelectbox :setColor="setColor" />
+            <ColorSelectbox :setColor="setColor" :color="color" />
         </div>
         <div class="sidebar__item">
             <SizeSelectbox />
@@ -28,7 +28,8 @@ import API from '@/api'
 export default defineComponent({
     name: "Sidebar",
     props: {
-        setColor: Function
+        setColor: Function,
+        color: String
     },
     components: { ProductSmallSlider, PriceRange, ColorSelectbox, SizeSelectbox, Menu },
     data() {

@@ -2,7 +2,7 @@
     <div>
         <h4>Colors</h4>
         <div v-for="option in options" :key="option.value" :class="option.className">
-            <button @click="setNewColor(option.value)">
+            <button @click="setNewColor(option.value)" :class="{ active: color === option.value }">
                 {{ option.text }}
                 <input :id="option.value" type="radio">
             </button>
@@ -15,11 +15,11 @@ import { defineComponent } from "vue";
 export default defineComponent({
     name: 'ColorSelectbox',
     props: {
-        setColor: Function
+        setColor: Function,
+        color: String
     },
     data() {
         return {
-            color: "",
             options: [
                 { text: 'White', value: 'white', className: "sidebar__item__color sidebar__item__color--white" },
                 { text: 'Yellow', value: 'yellow', className: "sidebar__item__color sidebar__item__color--yellow" },
@@ -128,6 +128,10 @@ export default defineComponent({
             background: #222;
             content: '';
             border-radius: 50%;
+        }
+
+        &.active {
+            font-weight: bold;
         }
     }
 }

@@ -36,7 +36,6 @@ export default defineComponent({
             let category = categoryId ? `category=${categoryId}` : '';
             let search = this.searchValue !== "" ? `search=${this.searchValue}` : "";
             vm.navigate(`/shop?` + [category, search].filter(field => field !== '').join('&'));
-            // vm.$parent?.$emit("getProductsByCategory", item.id)
         }
     },
 })
