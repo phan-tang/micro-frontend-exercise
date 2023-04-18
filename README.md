@@ -15,9 +15,11 @@ Run via docker:
 Run via yarn:
 > yarn docker:stop
 ```
-After all containers started, access to URL http://localhost:4000
+After all containers started, access to URL http://localhost
 for Hasura and login with secret key `HASURA_GRAPHQL_ADMIN_SECRET`
-from `.env` file.
+from `.env` file, services have different ports for Hasura:
+- CheckoutService: Port 5100.
+- ProductService: Port 5200.
 
 ### Backup data from PostgreSQL and Hasura
 ```
@@ -32,10 +34,6 @@ We should restore data the first time when running this service.
 
 Run via yarn:
 > yarn data:restore
-
-Use port 5100 for CheckoutService
-
-Use port 5200 for ProductService
 ```
 ## FE
 
