@@ -46,6 +46,7 @@ module.exports = defineConfig({
         exposes: exposeComponent,
         remotes: {
           shared: `${remotes.shared.scope}@${remotes.shared.url}`,
+          chat: `${remotes.chat.scope}@${remotes.chat.url}`,
         },
         shared: {
           vue: {
