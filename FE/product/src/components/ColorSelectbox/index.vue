@@ -1,41 +1,11 @@
 <template>
     <div>
         <h4>Colors</h4>
-        <div class="sidebar__item__color sidebar__item__color--white">
-            <label for="white">
-                White
-                <input id="white" type="radio">
-            </label>
-        </div>
-        <div class="sidebar__item__color sidebar__item__color--gray">
-            <label for="gray">
-                Gray
-                <input id="gray" type="radio">
-            </label>
-        </div>
-        <div class="sidebar__item__color sidebar__item__color--red">
-            <label for="red">
-                Red
-                <input id="red" type="radio">
-            </label>
-        </div>
-        <div class="sidebar__item__color sidebar__item__color--black">
-            <label for="black">
-                Black
-                <input id="black" type="radio">
-            </label>
-        </div>
-        <div class="sidebar__item__color sidebar__item__color--blue">
-            <label for="blue">
-                Blue
-                <input id="blue" type="radio">
-            </label>
-        </div>
-        <div class="sidebar__item__color sidebar__item__color--green">
-            <label for="green">
-                Green
-                <input id="green" type="radio">
-            </label>
+        <div v-for="option in options" :key="option.value" :class="option.className">
+            <button @click="setNewColor(option.value)">
+                {{ option.text }}
+                <input :id="option.value" type="radio">
+            </button>
         </div>
     </div>
 </template>
@@ -43,7 +13,28 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-    name: 'ColorSelectbox'
+    name: 'ColorSelectbox',
+    props: {
+        setColor: Function
+    },
+    data() {
+        return {
+            color: "",
+            options: [
+                { text: 'White', value: 'white', className: "sidebar__item__color sidebar__item__color--white" },
+                { text: 'Yellow', value: 'yellow', className: "sidebar__item__color sidebar__item__color--yellow" },
+                { text: 'Red', value: 'red', className: "sidebar__item__color sidebar__item__color--red" },
+                { text: 'Black', value: 'black', className: "sidebar__item__color sidebar__item__color--black" },
+                { text: 'Blue', value: 'blue', className: "sidebar__item__color sidebar__item__color--blue" },
+                { text: 'Green', value: 'green', className: "sidebar__item__color sidebar__item__color--green" },
+            ]
+        }
+    },
+    methods: {
+        setNewColor(newColor: string) {
+            this.setColor && this.setColor(newColor);
+        }
+    },
 })
 </script>
 <style lang="scss" scoped>
@@ -55,7 +46,7 @@ export default defineComponent({
 
     &.sidebar__item__color--white {
 
-        label {
+        button {
 
             &:after {
                 border: 2px solid #333333;
@@ -64,9 +55,9 @@ export default defineComponent({
         }
     }
 
-    &.sidebar__item__color--gray {
+    &.sidebar__item__color--yellow {
 
-        label {
+        button {
 
             &:after {
                 background: #E9A625;
@@ -76,7 +67,7 @@ export default defineComponent({
 
     &.sidebar__item__color--red {
 
-        label {
+        button {
 
             &:after {
                 background: #D62D2D;
@@ -86,7 +77,7 @@ export default defineComponent({
 
     &.sidebar__item__color--black {
 
-        label {
+        button {
 
             &:after {
                 background: $heading-color-2;
@@ -96,7 +87,7 @@ export default defineComponent({
 
     &.sidebar__item__color--blue {
 
-        label {
+        button {
 
             &:after {
                 background: #249BC8;
@@ -106,7 +97,7 @@ export default defineComponent({
 
     &.sidebar__item__color--green {
 
-        label {
+        button {
 
             &:after {
                 background: #3CC032;
@@ -114,11 +105,13 @@ export default defineComponent({
         }
     }
 
-    label {
+    button {
         font-size: 16px;
         color: #333333;
         position: relative;
         padding-left: 32px;
+        border: none;
+        background-color: transparent;
         cursor: pointer;
 
         input {

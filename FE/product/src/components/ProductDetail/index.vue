@@ -93,7 +93,7 @@ import API from "@/api";
 import Image from "@components/Image/index.vue";
 //@ts-ignore
 import { IProduct } from "@components/Product/product.type.ts";
-import { addToCart } from "@/helper/cart.helper";
+import { addToCart } from "@/helper/product.helper";
 export default defineComponent({
   name: "ProductDetail",
   components: {

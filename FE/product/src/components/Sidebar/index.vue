@@ -7,7 +7,7 @@
             <PriceRange />
         </div>
         <div class="sidebar__item sidebar__item__color--option">
-            <ColorSelectbox />
+            <ColorSelectbox :setColor="setColor" />
         </div>
         <div class="sidebar__item">
             <SizeSelectbox />
@@ -27,6 +27,9 @@ import Menu from './Menu.vue'
 import API from '@/api'
 export default defineComponent({
     name: "Sidebar",
+    props: {
+        setColor: Function
+    },
     components: { ProductSmallSlider, PriceRange, ColorSelectbox, SizeSelectbox, Menu },
     data() {
         return {
