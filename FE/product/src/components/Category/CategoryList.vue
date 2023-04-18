@@ -1,7 +1,7 @@
 <template>
     <ul>
         <li>
-            <a :class="{ active: !active }" @click="getAllProduct">All</a>
+            <a :class="{ active: !active }" @click="getAllProducts">All</a>
         </li>
         <li v-for="item in items" :key="item.id">
             <a :class="{ active: active === item.id }" @click="handleCategory(item)">{{ item.name }}</a>
@@ -35,17 +35,15 @@ export default defineComponent({
         this.items = data.category;
     },
     methods: {
-        getAllProduct() {
+        getAllProducts() {
             const vm: any = this;
             vm.navigate(`/shop`);
             vm.active = '';
-            // vm.$parent?.$emit("getAllProducts")
         },
         handleCategory(item: ICategory) {
             const vm: any = this;
             vm.active = item.id;
             vm.navigate(`/shop?category=${item.id}`);
-            // vm.$parent?.$emit("getProductsByCategory", item.id)
         },
     }
 })
