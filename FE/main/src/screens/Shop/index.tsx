@@ -8,7 +8,8 @@ const Shop = () => {
     module: "product", component: "ProductView", props: {
       navigate,
       searchParams: {
-        categoryId: Number(searchParams.get('category'))
+        categoryId: Number(searchParams.get('category')),
+        searchValue: String(searchParams.get('search'))
       }
     }
   });

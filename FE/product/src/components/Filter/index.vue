@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-5">
                 <div class="filter__sort">
-                    <span>Sort By Price</span>
+                    <span class="mx-1">Sort By Price</span>
                     <select v-model="selected">
                         <option v-for="option in options" :value="option.value" :key="option.value">
                             {{ option.text }}

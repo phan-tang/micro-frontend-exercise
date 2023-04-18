@@ -28,6 +28,18 @@ export default class Api {
     return { data, status }
   }
 
+  static async getProductsByCategorySearch(id: string | number, search: string) {
+    const url = "/api/rest/product/filter_product_by_category_search";
+    const { data, status } = await this.request.post(url, { ids: id, search: "%" + search + "%" });
+    return { data, status }
+  }
+
+  static async getProductsBySearch(search: string) {
+    const url = "/api/rest/product/filter_product_by_search";
+    const { data, status } = await this.request.post(url, { search: "%" + search + "%" });
+    return { data, status }
+  }
+
   static async getProducts() {
     const url = "/api/rest/product/products";
     const { data, status } = await this.request.post(url, { ids: 1 });

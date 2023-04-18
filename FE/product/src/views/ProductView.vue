@@ -43,6 +43,7 @@ export default defineComponent({
   provide() {
     return {
       categoryId: this.searchParams?.categoryId,
+      searchValue: this.searchParams?.searchValue,
       navigate: this.navigate,
     };
   },
@@ -65,10 +66,11 @@ export default defineComponent({
   methods: {
     async fetchProducts() {
       const categoryId = this.searchParams?.categoryId;
+      const searchValue = this.searchParams?.searchValue !== 'null' ? this.searchParams?.searchValue : '';
       if (categoryId) {
-        this.getProductsByCategory(categoryId);
+        this.getProductsByCategorySearch(categoryId, searchValue);
       } else {
-        this.getAllProducts();
+        this.getProductsBySearch(searchValue);
       }
     },
     async getAllProducts() {
@@ -79,6 +81,16 @@ export default defineComponent({
     async getProductsByCategory(id: IProduct['id']) {
       const { data } = await API.getProductsByCategory(id);
       this.items = sortByKey(data.category?.[0]?.products, 'price', this.sortOrder);
+    },
+    async getProductsByCategorySearch(id: IProduct['id'], search: string) {
+      const { data } = await API.getProductsByCategorySearch(id, search);
+      this.items = sortByKey(data.product, 'price', this.sortOrder);
+      this.saleItems = data.product.filter((el: IProduct) => el.discount);
+    },
+    async getProductsBySearch(search: string) {
+      const { data } = await API.getProductsBySearch(search);
+      this.items = sortByKey(data.product, 'price', this.sortOrder);
+      this.saleItems = data.product.filter((el: IProduct) => el.discount);
     },
     async setSortOrder(order: string) {
       this.sortOrder = order;

@@ -10,4 +10,5 @@ module.exports = {
   ProductDetailView: "./src/views/mountProductDetailView",
   ProductSmallSlider: "./src/components/Slider/mountProductSmallSlider",
   CategoryList: "./src/components/Category/mountCategoryList",
+  Search: "./src/components/Search/mountSearch",
 };

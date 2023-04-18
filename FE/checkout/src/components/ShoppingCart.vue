@@ -2,7 +2,7 @@
   <template v-if="!cartData || !cartData.items.length">
     <div class="row">
       <div class="col-lg-12">
-        <h3>Your cart is empty!</h3>
+        <h3 class="my-2 text-center">Your cart is empty!</h3>
       </div>
     </div>
   </template>
@@ -21,13 +21,8 @@
               </tr>
             </thead>
             <tbody>
-              <CartItem
-                v-for="item in cartData.items"
-                :key="item.id"
-                :item="item"
-                @removeItem="removeItem"
-                @updateQty="onChangeQty"
-              />
+              <CartItem v-for="item in cartData.items" :key="item.id" :item="item" @removeItem="removeItem"
+                @updateQty="onChangeQty" />
             </tbody>
           </table>
         </div>
@@ -37,10 +32,7 @@
       <div class="col-lg-12">
         <div class="shoping__cart__btns">
           <a class="primary-btn cart-btn"> CONTINUE SHOPPING </a>
-          <a
-            class="primary-btn cart-btn cart-btn-right"
-            @click="onUpdateLocalStorage"
-          >
+          <a class="primary-btn cart-btn cart-btn-right" @click="onUpdateLocalStorage">
             <span class="icon_loading" />
             UPDATE CART
           </a>

@@ -28,6 +28,24 @@
 - definition:
     query:
       collection_name: allowed-queries
+      query_name: Filter Products By Category Search
+  url: product/filter_product_by_category_search
+  methods:
+    - POST
+  name: Filter Products By Category Search
+  comment: null
+- definition:
+    query:
+      collection_name: allowed-queries
+      query_name: Filter Products By Search
+  url: product/filter_product_by_search
+  methods:
+    - POST
+  name: Filter Products By Search
+  comment: null
+- definition:
+    query:
+      collection_name: allowed-queries
       query_name: Get Lasted Products
   url: product/lasted_products
   methods:

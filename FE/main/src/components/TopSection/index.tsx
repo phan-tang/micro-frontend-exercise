@@ -1,10 +1,12 @@
 import React from 'react';
-
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { mountRemoteComponent } from '@/utils/loadComponent';
 import CategoryMenu from './CategoryMenu';
-import Search from './Search';
 
 const TopSection = () => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
   const heroBannerProps = {
     title: 'FRESH FRUIT',
     content: 'Vegetable <br/>100% Organic',
@@ -21,7 +23,14 @@ const TopSection = () => {
         </div>
         <div className="col-lg-9">
           <div className="hero__search">
-            <Search />
+            {mountRemoteComponent({
+              module: 'product', component: 'Search', props: {
+                navigate,
+                searchParams: {
+                  categoryId: Number(searchParams.get('category')),
+                }
+              }
+            })}
 
             <div className="hero__search__phone">
               <div className="hero__search__phone__icon">

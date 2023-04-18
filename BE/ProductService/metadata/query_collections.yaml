@@ -153,3 +153,29 @@
               availability
             }
           }
+      - name: Filter Products By Category Search
+        query: |
+          query MyQuery ($ids: Int, $search: String) {
+            product(where: {_and:[{category_id:{_eq:$ids}},{name:{_like:$search}}]}) {
+              name
+              id
+              price
+              list_img {
+                url
+              }
+              slug
+            }
+          }
+      - name: Filter Products By Search
+        query: |
+          query MyQuery ($search: String) {
+            product(where: {name:{_like:$search}}) {
+              name
+              id
+              price
+              list_img {
+                url
+              }
+              slug
+            }
+          }
